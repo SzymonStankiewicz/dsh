@@ -1,4 +1,6 @@
-install: 
+language: c
+install:
+  - make get-deps
   - make
 before_script:
   - cd tests
