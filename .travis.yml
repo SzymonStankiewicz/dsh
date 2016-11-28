@@ -8,7 +8,7 @@ before_script:
   - cd tests
   - ./prepare.sh
 script:
-  - ./run_all.sh ../dsh
+  - ./run_all.sh ../dsh | python3 check.py
 after_script:
   - ./clean.sh
   - cd ..

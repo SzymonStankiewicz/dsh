@@ -1,0 +1,42 @@
+PIPELINE 1
+	COMMAND 1
+		argv=:ls:-las:
+		redirections=:
+	COMMAND 2
+		argv=:grep:k:
+		redirections=:
+	COMMAND 3
+		argv=:wc:
+		redirections=:
+Totally 3 commands in pipeline 1.
+PIPELINE 2
+	COMMAND 1
+		argv=:echo:abc:
+		redirections=:(f1,>):
+Totally 1 commands in pipeline 2.
+PIPELINE 3
+	COMMAND 1
+		argv=:cat:
+		redirections=:(f2,<):
+Totally 1 commands in pipeline 3.
+PIPELINE 4
+	COMMAND 1
+		argv=:echo:abc:
+		redirections=:(f3,>>):
+Totally 1 commands in pipeline 4.
+Totally 4 pipelines.
+
+	COMMAND 1
+		argv=:ls:-las:
+		redirections=:
+PIPELINE 1
+	COMMAND 1
+		argv=:sleep:3:
+		redirections=:
+Totally 1 commands in pipeline 1.
+Totally 1 pipelines. Line in background.
+
+Syntax error.
+
+	COMMAND 1
+		(NULL)

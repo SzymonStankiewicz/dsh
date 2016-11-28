@@ -1,3 +1,9 @@
 # builtin kill test 2
-lkill -2 12751 
-lkill -2 12752 
+lkill -2 6399 
+lkill -2 6400 
+lkill -2 6414 
+lkill -2 6415 
+lkill -2 11825 
+lkill -2 11826 
+lkill -2 11840 
+lkill -2 11841 
