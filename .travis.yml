@@ -1,0 +1,11 @@
+install: 
+  - make
+before_script:
+  - cd tests
+  - ./prepare.sh
+script:
+  - ./run_all.sh ../dsh
+after_script:
+  - ./clean.sh
+  - cd ..
+
