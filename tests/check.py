@@ -1,8 +1,8 @@
 import sys
 
-OK = '\033[92m'
-FAIL = '\033[91m'
-END = '\033[0m'
+OK = '[\033[92m'
+FAIL = '[\033[91m'
+END = '\033[0m]'
 
 failures = 0
 number_of_tests = 0
@@ -11,6 +11,9 @@ results = []
 
 for line in sys.stdin:
     l = line.strip()
+    if "Suite" in l:
+        tests.append('')
+        results.append(l)
     if l.startswith("Test"):
         number_of_tests += 1
         tests.append(l)
@@ -24,7 +27,7 @@ for line in sys.stdin:
 print("Tests result:")
 
 for test, result in zip(tests, results):
-    print("[{}] {}".format(result, test))
+    print("{} {}".format(result, test))
 
 if failures:
     print("{}/{} tests failed".format(failures, number_of_tests))
