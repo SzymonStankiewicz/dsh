@@ -22,3 +22,4 @@ do
 	./run_suite.sh $TESTED_SHELL $suite_number
 	echo 
 done
+

@@ -8,7 +8,11 @@ before_script:
   - cd tests
   - ./prepare.sh
 script:
-  - ./run_all.sh ../dsh | python3 check.py
+  - echo -en 'travis_fold:start:running_tests\\r'
+  - ./run_all.sh ../dsh >>result 2>&1
+  - cat result
+  - echo -en 'travis_fold:end:running_tests\\r'
+  - cat result | python3 check.py
 after_script:
   - ./clean.sh
   - cd ..
