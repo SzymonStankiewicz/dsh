@@ -20,6 +20,8 @@ fi
 
 echo "--- Suite" $SUITE_NUMBER "---"
 
+mkdir $SUITE_DIR/output
+
 for t in $(ls $SUITE_DIR/$INPUT_DIR/ | sort -n)
 do
 	filename=$(basename $t)
