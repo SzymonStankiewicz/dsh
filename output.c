@@ -1,6 +1,8 @@
 #include <string.h>
 #include <unistd.h>
 #include <stdlib.h>
+#include <stdio.h>
+#include <sys/stat.h>
 
 #include "output.h"
 #include "config.h"
@@ -30,3 +32,10 @@ int write_syntax_error() {
   return write_error(SYNTAX_ERROR_STR) + write_error("\n");
 }
 
+void write_prompt() {
+	struct stat stdout_stat;
+	if (fstat(STDIN_FILENO, &stdout_stat) >= 0 && S_ISCHR(stdout_stat.st_mode)) {
+		write_out(PROMPT_STR);
+		fflush(stdout);
+	}
+}

@@ -65,7 +65,7 @@ void append_new_line() {
 }
 
 int returned_last_line = 0;
-const char* read_line() {
+char* readline() {
 	int skip = 0;
 	do {
 		skip = 0;

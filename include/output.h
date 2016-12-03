@@ -5,5 +5,6 @@ int write_file(int fd, char *str);
 int write_out(char *str);
 int write_error(char *str);
 int write_syntax_error();
+void write_prompt();
 
 #endif //__DSH_OUT_H__

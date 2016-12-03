@@ -9,8 +9,12 @@
 int
 main(int argc, char *argv[])
 {
-	char* m;
-	while(m = read_line()) {
-		write_out(m);
+	char *line;
+	while(1) {
+		write_prompt();
+		line = readline();
+		if(line == NULL) break;
+		write_out(line);
 	}
+	return 0;
 }
