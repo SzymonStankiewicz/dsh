@@ -87,5 +87,6 @@ char* readline() {
 		if(skip) write_syntax_error();
 	}
 	while(skip);
+	if(returned_last_line && out[0] == '\n') return NULL;
 	return out;
 }

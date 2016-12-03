@@ -1,11 +1,3 @@
 # builtin kill test 1
-lkill -10 15524 
-lkill -10 15525 
-lkill -10 15543 
-lkill -10 15544 
-lkill -10 20233 
-lkill -10 20234 
-lkill -10 20256 
-lkill -10 20257 
-lkill -10 25600 
-lkill -10 25601 
+lkill -10 10208 
+lkill -10 10209 

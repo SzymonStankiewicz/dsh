@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <sys/wait.h>
 #include <errno.h>
+#include <string.h>
 
 #include "config.h"
 #include "siparse.h"
@@ -26,7 +27,21 @@ void validate_error(char* prog_name) {
 	exit(127);
 }
 
+int run_builtin_command(command *com) {
+	if(com == NULL || com->argv[0] == NULL) return 1;
+	for(int i = 0; builtins_table[i].name != NULL; i++) {
+		if(strcmp(builtins_table[i].name, com->argv[0]) == 0) {
+			if(builtins_table[i].fun(com->argv) == -1) {
+				write_error(3, "Builtin ", builtins_table[i].name ," error.\n");
+			}
+			return 1;
+		}
+	}
+	return 0;
+}
+
 void run_command(command *com) {
+	if(com == NULL || com->argv[0] == NULL) return;
 	pid_t pid = fork();
 
 	if (pid == 0) {
@@ -51,6 +66,7 @@ void execute(char* in) {
 		write_syntax_error();
 	}
 	else {
+		if(run_builtin_command(pickfirstcommand(ln))) return;
 		com = pickfirstcommand(ln);
 		run_command(com);
 	}

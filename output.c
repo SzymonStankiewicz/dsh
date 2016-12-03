@@ -32,6 +32,7 @@ int write_out_multi(int n, ...) {
 	int i;
 	for(i = 0; i<n; i++) {
 		char* str = (char*) va_arg(ap, char*);
+		if(str == NULL) continue;
   	whole_write += write_out(str);
 	}
 	return whole_write;
@@ -44,6 +45,7 @@ int write_error(int n, ...) {
 	int i;
 	for(i = 0; i<n; i++) {
 		char* str = (char*) va_arg(ap, char*);
+		if(str == NULL) continue;
   	whole_write += write_to_file(STDERR_FILENO, str);
 	}
 	return whole_write;
@@ -53,10 +55,11 @@ int write_syntax_error() {
   return write_error(2, SYNTAX_ERROR_STR, "\n");
 }
 
+char path[MAX_LINE_LENGTH];
 void write_prompt() {
 	struct stat stdout_stat;
 	if (fstat(STDIN_FILENO, &stdout_stat) >= 0 && S_ISCHR(stdout_stat.st_mode)) {
-		write_out(PROMPT_STR);
+		write_out_multi(3, getcwd(path,  MAX_LINE_LENGTH), " ", PROMPT_STR);
 		fflush(stdout);
 	}
 }

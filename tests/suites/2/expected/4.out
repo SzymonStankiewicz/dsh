@@ -1,0 +1,15 @@
+bin
+servers
+chdir to servers
+fs
+rs
+init
+Makefile
+pm
+chdir to pm
+fs
+rs
+init
+Makefile
+pm
+done
