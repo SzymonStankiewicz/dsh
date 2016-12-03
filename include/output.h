@@ -3,7 +3,8 @@
 
 int write_file(int fd, char *str);
 int write_out(char *str);
-int write_error(char *str);
+int write_out_multi(int n, ...);
+int write_error(int n, ...);
 int write_syntax_error();
 void write_prompt();
 
