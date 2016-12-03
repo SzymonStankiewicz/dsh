@@ -5,6 +5,7 @@
 
 
 #include "input.h"
+#include "output.h"
 #include "config.h"
 
 static char out[MAX_LINE_LENGTH + 1];
@@ -82,6 +83,7 @@ char* readline() {
 				append_new_line();
 			}
 		}
+		if(skip) write_syntax_error();
 	}
 	while(skip);
 	return out;
