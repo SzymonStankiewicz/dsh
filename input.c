@@ -51,7 +51,8 @@ void move(int pos) {
 
 //Copy first line from line to out
 int copy_line() {
-	for(int i = last_read; i<position; i++) {
+	int i;
+	for(i = last_read; i<position; i++) {
 		if(line[i] == '\n') {
 			move(i);
 			return i;
