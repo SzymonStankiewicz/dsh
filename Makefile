@@ -3,7 +3,7 @@ CFLAGS=$(INC)
 
 PARSERDIR=input_parse
 
-SRCS=utils.c dsh.c builtins.c input.c output.c
+SRCS=utils.c dsh.c builtins.c input.c output.c execute.c
 OBJS:=$(SRCS:.c=.o)
 
 all: clean dsh mshell
