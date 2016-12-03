@@ -29,7 +29,8 @@ int write_out_multi(int n, ...) {
 	va_list ap;
 	va_start(ap, n);
 	int whole_write = 0;
-	for(int i = 0; i<n; i++) {
+	int i;
+	for(i = 0; i<n; i++) {
 		char* str = (char*) va_arg(ap, char*);
   	whole_write += write_out(str);
 	}
@@ -40,7 +41,8 @@ int write_error(int n, ...) {
 	va_list ap;
 	va_start(ap, n);
 	int whole_write = 0;
-	for(int i = 0; i<n; i++) {
+	int i;
+	for(i = 0; i<n; i++) {
 		char* str = (char*) va_arg(ap, char*);
   	whole_write += write_to_file(STDERR_FILENO, str);
 	}
