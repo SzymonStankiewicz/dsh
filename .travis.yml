@@ -6,6 +6,8 @@ install:
   - make
 before_script:
   - cd tests
+  - mkdir bin
+  - make
   - ./prepare.sh
 script:
   - echo -en 'travis_fold:start:running_tests\\r'
