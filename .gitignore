@@ -58,6 +58,7 @@
 
 dsh
 mshell
+tests/bin
 
 ### Vim ###
 # swap
