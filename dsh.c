@@ -1,5 +1,6 @@
 #include "io.h"
 #include "execute.h"
+#include "signals.h"
 
 
 int main(int argc, char *argv[])

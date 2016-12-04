@@ -10,10 +10,11 @@
 #include "utils.h"
 #include "builtins.h"
 #include "io.h"
+#include "signals.h"
 
 #include "execute.h"
 
-sigset_t waitMask;
+int isBackground;
 
 void handle_execvp_error(char* prog_name) {
 	char* error_type = NULL;
@@ -102,6 +103,12 @@ void run_command(command *com, int *read_pipe, int *write_pipe) {
 	pid_t pid = fork();
 
 	if (pid == 0) {
+		if (isBackground)
+			setsid(); 
+	
+		default_actions();
+		ENABLE_SIGCHLD;
+
 		redirect_in(read_pipe);
 		redirect_out(write_pipe);
 		file_redirect(com);
@@ -110,6 +117,9 @@ void run_command(command *com, int *read_pipe, int *write_pipe) {
 	}
 	else if(pid < 0) {
 		exit(2);
+	}
+	else {
+		add_pid(pid, isBackground);
 	}
 }
 
@@ -127,6 +137,8 @@ void close_pipe(int* pipes) {
 }
 
 void run_pipeseq(pipeline pipe) {
+	clean_foreground();
+	DISABLE_SIGCHLD;
 	int coms = 0;
 	command **com = pipe;
 	int* pipes[2];
@@ -143,17 +155,17 @@ void run_pipeseq(pipeline pipe) {
 		coms++;
 	}
 	close_pipe(pipes[0]);
-	while(coms) {
-		int status;
-		wait(&status);
-		coms--;
+	if(!isBackground) {
+		wait_for_foreground();
 	}
+	ENABLE_SIGCHLD;
 }
 
 void execute(char* in) {
 	line* ln;
 	command *com;
 	ln = parseline(in);
+	isBackground = ln->flags;
 	if(ln == NULL) {
 		write_syntax_error();
 	}
@@ -164,8 +176,4 @@ void execute(char* in) {
 			pipe++;
 		}
 	}
-}
-
-void init_signals_handling() {
-	sigprocmask(SIG_BLOCK, NULL, &waitMask);
 }

@@ -1,6 +1,7 @@
 #ifndef  __DSH_OUT_H__
 #define  __DSH_OUT_H__
 
+char* itoa(int x);
 int write_file(int fd, char *str);
 int write_out(char *str);
 int write_out_multi(int n, ...);

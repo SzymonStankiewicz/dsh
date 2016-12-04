@@ -7,6 +7,13 @@
 
 #include "output.h"
 #include "config.h"
+#include "signals.h"
+
+char str[40];
+char* itoa(int x) {
+	snprintf(str, 10, "%d", x);
+	return str;
+}
 
 int write_to_file(int fd, char *str) {
   int len = strlen(str);
@@ -59,6 +66,7 @@ char path[MAX_LINE_LENGTH];
 void write_prompt() {
 	struct stat stdout_stat;
 	if (fstat(STDIN_FILENO, &stdout_stat) >= 0 && S_ISCHR(stdout_stat.st_mode)) {
+		print_background();
 		write_out_multi(3, getcwd(path,  MAX_LINE_LENGTH), " ", PROMPT_STR);
 		fflush(stdout);
 	}

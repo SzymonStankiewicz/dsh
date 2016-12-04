@@ -2,6 +2,7 @@
 #define _CONFIG_H_
 
 #define MAX_LINE_LENGTH 2048
+#define MAX_PROCS 2048
 
 #define SYNTAX_ERROR_STR "Syntax error."
 
