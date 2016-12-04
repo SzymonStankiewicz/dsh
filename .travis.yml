@@ -11,6 +11,7 @@ before_script:
   - ./prepare.sh
 script:
   - echo -en 'travis_fold:start:running_tests\\r'
+  - ./run_all.sh ../dsh
   - ./run_all.sh ../dsh >>result 2>&1
   - cat result
   - echo -en 'travis_fold:end:running_tests\\r'
