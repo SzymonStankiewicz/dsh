@@ -44,7 +44,8 @@ void handle_open_error(char* filename) {
 
 int run_builtin_command(command *com) {
 	if(com == NULL || com->argv == NULL || com->argv[0] == NULL) return 1;
-	for(int i = 0; builtins_table[i].name != NULL; i++) {
+	int i;
+	for(i = 0; builtins_table[i].name != NULL; i++) {
 		if(strcmp(builtins_table[i].name, com->argv[0]) == 0) {
 			if(builtins_table[i].fun(com->argv) == -1) {
 				write_error(3, "Builtin ", builtins_table[i].name ," error.\n");
